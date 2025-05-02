@@ -9,6 +9,7 @@ const RegisterForm = () => {
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors },
     } = useForm<NewUser>({
         resolver: zodResolver(newUserSchema),
@@ -18,41 +19,45 @@ const RegisterForm = () => {
         console.log(data);
     };
 
-    // Button Area
-    const [typeButton, setTypeButton] = useState("");
-    const selectButton = (payload: string) => {
-        setTypeButton(payload);
-    };
-
     return (
-        <form>
-            <div className="flex flex-row space-x-4 mb-5">
-                <button
-                    className={`flex flex-row items-center justify-center ${
-                        typeButton === "Merchant"
-                            ? "bg-black text-white"
-                            : "bg-white text-black"
-                    } w-40 h-10 
+        <form onSubmit={handleSubmit(createANewUser)}>
+            <Controller
+                name="type"
+                control={control}
+                render={({ field }) => (
+                    <div className="flex flex-row space-x-4 mb-5">
+                        <button
+                            type="button"
+                            className={`flex flex-row items-center justify-center ${
+                                field.value === "Merchant"
+                                    ? "bg-black text-white"
+                                    : "bg-white text-black"
+                            } w-40 h-10 
                     rounded-2xl border-1 border-gray-400 hover:bg-black hover:text-white transition-all duration-300`}
-                    onClick={(e) => selectButton("Merchant")}
-                >
-                    <FaStoreAlt className="mr-2" />
-                    Merchant
-                </button>
-                <button
-                    className={`flex flex-row items-center justify-center ${
-                        typeButton === "Agent"
-                            ? "bg-black text-white"
-                            : "bg-white text-black"
-                    } w-40 h-10 
+                            onClick={() => field.onChange("Merchant")}
+                        >
+                            <FaStoreAlt className="mr-2" />
+                            Merchant
+                        </button>
+
+                        <button
+                            type="button"
+                            className={`flex flex-row items-center justify-center ${
+                                field.value === "Agent"
+                                    ? "bg-black text-white"
+                                    : "bg-white text-black"
+                            } w-40 h-10 
                         rounded-2xl border-1 border-gray-400 hover:bg-black hover:text-white transition-all duration-300`}
-                    onClick={(e) => selectButton("Agent")}
-                >
-                    <FaUserAstronaut className="mr-2" />
-                    Agent
-                </button>
-            </div>
-            <div className="flex flex-col justify-center space-y-2 ">
+                        onClick={() => field.onChange("Agent")}
+                        >
+                            <FaUserAstronaut className="mr-2" />
+                            Agent
+                        </button>
+                    </div>
+                )}
+            />
+            {/* INPUT AREA */}
+            <div className="flex flex-col justify-center space-y-2 mb-5">
                 {/* Field color #f4f8f9 */}
                 <input
                     required
@@ -95,22 +100,37 @@ const RegisterForm = () => {
                 </select>
                 <input
                     required
-                    type="text"
+                    type="phone"
                     placeholder="Phone number"
                     {...register("phone")}
                     className="bg-[#f4f8f9] h-9 rounded-md p-4"
                 />
                 <input
                     required
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     {...register("password")}
                     className="bg-[#f4f8f9] h-9 rounded-md p-4"
                 />
                 <div className="flex flex-row">
-                    <input type="checkbox" {...register("policy")} className="accent-[#f4f8f9]" />
-                    <p className="text-[13px] ml-2">I accept the <b>Privacy Policiy</b> </p>
+                    <input
+                        type="checkbox"
+                        {...register("policy")}
+                        className="accent-[#f4f8f9]"
+                    />
+                    <p className="text-[13px] ml-2">
+                        I accept the <b>Privacy Policiy</b>{" "}
+                    </p>
                 </div>
+            </div>
+            <div>
+                <button
+                    onClick={() => console.log(errors)}
+                    type="submit"
+                    className="bg-[#fd5b13] text-white text-[15px] border-1 border-gray-200 rounded-md w-full h-9 hover:bg-white hover:text-black transition-all duration-300"
+                >
+                    Create an Account
+                </button>
             </div>
         </form>
     );
