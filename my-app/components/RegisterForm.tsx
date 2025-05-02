@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { FaStoreAlt, FaUserAstronaut } from "react-icons/fa";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, SubmitHandler, Controller } from "react-hook-form"
 
 const RegisterForm = () => {
     return (
