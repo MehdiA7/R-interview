@@ -21,6 +21,7 @@ const RegisterForm = () => {
 
     return (
         <form onSubmit={handleSubmit(createANewUser)}>
+            {/* BUTTON AREA */}
             <Controller
                 name="type"
                 control={control}
@@ -33,7 +34,13 @@ const RegisterForm = () => {
                                     ? "bg-black text-white"
                                     : "bg-white text-black"
                             } w-40 h-10 
-                    rounded-2xl border-1 border-gray-400 hover:bg-black hover:text-white transition-all duration-300`}
+                    rounded-2xl border-1 border-gray-400 hover:bg-black hover:text-white transition-all duration-300
+                    ${
+                        errors.type
+                            ? "animate-bounce border-2 border-red-600"
+                            : null
+                    }
+                    `}
                             onClick={() => field.onChange("Merchant")}
                         >
                             <FaStoreAlt className="mr-2" />
@@ -47,8 +54,13 @@ const RegisterForm = () => {
                                     ? "bg-black text-white"
                                     : "bg-white text-black"
                             } w-40 h-10 
-                        rounded-2xl border-1 border-gray-400 hover:bg-black hover:text-white transition-all duration-300`}
-                        onClick={() => field.onChange("Agent")}
+                        rounded-2xl border-1 border-gray-400 hover:bg-black hover:text-white transition-all duration-300
+                        ${
+                            errors.type
+                                ? "animate-bounce border-2 border-red-600"
+                                : null
+                        }`}
+                            onClick={() => field.onChange("Agent")}
                         >
                             <FaUserAstronaut className="mr-2" />
                             Agent
@@ -60,16 +72,18 @@ const RegisterForm = () => {
             <div className="flex flex-col justify-center space-y-2 mb-5">
                 {/* Field color #f4f8f9 */}
                 <input
-                    required
                     type="text"
                     placeholder="First Name"
                     {...register("firstname")}
-                    className="bg-[#f4f8f9] h-9 rounded-md p-4"
+                    className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
+                        errors.firstname ? "border-2 border-red-500" : null
+                    }`}
                 />
                 <select
-                    required
                     {...register("country")}
-                    className="bg-[#f4f8f9] rounded-md pl-4 pr-4 h-9"
+                    className={`bg-[#f4f8f9] rounded-md pl-4 pr-4 h-9 ${
+                        errors.country ? "border-2 border-red-500" : null
+                    }`}
                 >
                     <option value="Select a country">
                         Where your company based ?
@@ -79,16 +93,18 @@ const RegisterForm = () => {
                     <option value="Other">Other</option>
                 </select>
                 <input
-                    required
                     type="text"
                     placeholder="Business E-mail"
                     {...register("email")}
-                    className="bg-[#f4f8f9] h-9 rounded-md p-4"
+                    className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
+                        errors.email ? "border-2 border-red-500" : null
+                    }`}
                 />
                 <select
-                    required
                     {...register("industry")}
-                    className="bg-[#f4f8f9] rounded-md pl-4 pr-4 h-9"
+                    className={`bg-[#f4f8f9] rounded-md pl-4 pr-4 h-9 ${
+                        errors.industry ? "border-2 border-red-500" : null
+                    }`}
                 >
                     <option value="Select a country">
                         Please select an Industry
@@ -99,18 +115,20 @@ const RegisterForm = () => {
                     <option value="Energy">Energy</option>
                 </select>
                 <input
-                    required
                     type="phone"
                     placeholder="Phone number"
                     {...register("phone")}
-                    className="bg-[#f4f8f9] h-9 rounded-md p-4"
+                    className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
+                        errors.phone ? "border-2 border-red-500" : null
+                    }`}
                 />
                 <input
-                    required
                     type="password"
                     placeholder="Password"
                     {...register("password")}
-                    className="bg-[#f4f8f9] h-9 rounded-md p-4"
+                    className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
+                        errors.password ? "border-2 border-red-500" : null
+                    }`}
                 />
                 <div className="flex flex-row">
                     <input
@@ -118,7 +136,11 @@ const RegisterForm = () => {
                         {...register("policy")}
                         className="accent-[#f4f8f9]"
                     />
-                    <p className="text-[13px] ml-2">
+                    <p
+                        className={`text-[13px] ml-2 ${
+                            errors.policy ? "text-red-500" : null
+                        }`}
+                    >
                         I accept the <b>Privacy Policiy</b>{" "}
                     </p>
                 </div>

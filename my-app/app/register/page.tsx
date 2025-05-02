@@ -6,8 +6,8 @@ import Link from "next/link";
 const RegisterPage = () => {
     return (
         <>
-            <div className="flex flex-col items-center justify-center mt-40">
-                <h1 className="text-[41px] font-semibold mb-14">
+            <div className="flex flex-col items-center justify-center mt-30">
+                <h1 className="text-[41px] font-semibold mb-15">
                     Create an account
                 </h1>
                 <RegisterForm />
