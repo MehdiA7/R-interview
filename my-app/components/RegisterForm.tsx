@@ -3,8 +3,21 @@ import React from "react";
 import { FaStoreAlt, FaUserAstronaut } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
+import { NewUser, newUserSchema } from "@/lib/schema/newUser";
 
 const RegisterForm = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<NewUser>({
+        resolver: zodResolver(newUserSchema)
+    });
+
+    const createANewUser: SubmitHandler<NewUser> = (data) => {
+        console.log(data);
+    };
+
     return (
         <div>
             <div className="flex flex-row space-x-4">
