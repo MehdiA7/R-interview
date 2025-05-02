@@ -7,7 +7,8 @@ export const newUserSchema = z.object({
     email: z.string().min(4, "Valid Email is required !"),
     industry: z.enum(["Finance", "Medical", "Auto", "Energy"]),
     phone: z.number().min(5, "Phone number is required"),
-    password: z.string().min(8, "Your password need 8 character !")
+    password: z.string().min(8, "Your password need 8 character !"),
+    policy: z.boolean()
 })
 
 export type NewUser = z.infer<typeof newUserSchema>;
