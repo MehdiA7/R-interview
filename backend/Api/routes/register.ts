@@ -6,7 +6,7 @@ router.use(express.json());
 // I'm stopped here. The doc
 // https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
 
-router.post("/register", async (res: Response, req: Request) => {
+router.post("/register", async ( req: Request, res: Response) => {
     const saltRounds = 10;
     const userPassword = "12345678";
 

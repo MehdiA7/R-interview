@@ -30,6 +30,18 @@ class dbInteract {
         );
     }
     
-}
+};
+
+// REQUIRED
+// CREATE TABLE users (
+//     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+//     firstname varchar(255),
+//     country varchar(50),
+//     email varchar(255),
+//     industry varchar(255),
+//     phone varchar(255),
+//     password varchar(255),
+//     policy BOOLEAN
+// );
 
 module.exports = dbInteract;

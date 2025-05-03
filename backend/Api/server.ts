@@ -7,8 +7,12 @@ const app = express();
 
 const PORT = process.env.PORT;
 
+const registerRouter = require("./routes/register");
+
+app.use("/", registerRouter);
+
 app.get("/", (request: Request, response: Response) => {
-    response.status(200).send("Hello World");
+    response.status(200).send({ message: "The api work well !"});
 });
 
 app.listen(PORT, () => {
