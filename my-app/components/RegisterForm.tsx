@@ -5,6 +5,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { NewUser, newUserSchema } from "@/lib/schema/newUser";
 
+// RESPONSE OF THIS COMPONENT
+// { 
+//  type: "Agent",
+//  firstname: "Mehdi",
+//  country: "Belgium",
+//  email: "m@m.com",
+//  industry: "Energy",
+//  phone: "049583920",
+//  password: "12345678",
+//  policy: true 
+//  };
+
 const RegisterForm = () => {
     const {
         register,
@@ -93,7 +105,7 @@ const RegisterForm = () => {
                     <option value="Other">Other</option>
                 </select>
                 <input
-                    type="text"
+                    type="email"
                     placeholder="Business E-mail"
                     {...register("email")}
                     className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
