@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import mariadb from "mariadb";
+import { RegisterBody } from "../lib/type";
 dotenv.config();
 
 const pool = mariadb.createPool({
@@ -11,7 +12,7 @@ const pool = mariadb.createPool({
 });
 
 class dbInteract {
-    async aQuery(query: string) {
+    async aQuery(query: string, p0?: (string | boolean)[]) {
         let connection;
         try {
             connection = await pool.getConnection();
@@ -24,13 +25,13 @@ class dbInteract {
         }
     }
 
-    async getAllButNoPass() {
+    async createUser(body: RegisterBody) {
         return await this.aQuery(
-            `SELECT id, username, team, admin, subscription_date, team_id FROM users`
+            `INSERT INTO users (firstname, country, email, industry, phone, password, policy) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [body.firstname, body.country, body.email, body.industry, body.phone, body.password, body.policy]
         );
     }
-    
-};
+}
 
 // REQUIRED
 // CREATE TABLE users (
