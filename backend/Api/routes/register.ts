@@ -10,7 +10,7 @@ const _db = new dbInteract();
 // I'm stopped here. The doc
 // https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
 
-router.post("/register", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
     const saltRounds = 10;
     let theBody = req.body;
 
@@ -21,7 +21,6 @@ router.post("/register", async (req: Request, res: Response) => {
     return;
     }
 
-    console.log("after")
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(theBody.password, salt);
     theBody.password = hashedPassword;

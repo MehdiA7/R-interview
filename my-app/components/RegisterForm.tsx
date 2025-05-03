@@ -5,9 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { NewUser, newUserSchema } from "@/lib/schema/newUser";
 import { createANewUser } from "@/serverAction/fetchConnection";
+import { redirect } from 'next/navigation'
+
 
 // RESPONSE OF THIS COMPONENT
-// { 
+// {
 //  type: "Agent",
 //  firstname: "Mehdi",
 //  country: "Belgium",
@@ -15,7 +17,7 @@ import { createANewUser } from "@/serverAction/fetchConnection";
 //  industry: "Energy",
 //  phone: "049583920",
 //  password: "12345678",
-//  policy: true 
+//  policy: true
 //  };
 
 const RegisterForm = () => {
@@ -28,9 +30,14 @@ const RegisterForm = () => {
         resolver: zodResolver(newUserSchema),
     });
 
-    const sendUserData: SubmitHandler<NewUser> = (data) => {
-        createANewUser(data);
-        console.log(data);
+    const [emailIsTaken, setEmailIsTaken] = useState(false);
+
+    const sendUserData: SubmitHandler<NewUser> = async (data) => {
+        const response: Response = await createANewUser(data);
+
+        if (response.status === 409) return setEmailIsTaken(true);
+        
+        redirect('/login');
     };
 
     return (
@@ -111,9 +118,16 @@ const RegisterForm = () => {
                     placeholder="Business E-mail"
                     {...register("email")}
                     className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
-                        errors.email ? "border-2 border-red-500" : null
+                        errors.email || emailIsTaken
+                            ? "border-2 border-red-500"
+                            : null
                     }`}
                 />
+                {emailIsTaken && (
+                    <p className="text-sm animate-bounce text-red-600">
+                        This email is taken !
+                    </p>
+                )}
                 <select
                     {...register("industry")}
                     className={`bg-[#f4f8f9] rounded-md pl-4 pr-4 h-9 ${
