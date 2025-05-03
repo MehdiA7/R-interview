@@ -4,6 +4,7 @@ import { FaStoreAlt, FaUserAstronaut } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { NewUser, newUserSchema } from "@/lib/schema/newUser";
+import { createANewUser } from "@/serverAction/fetchConnection";
 
 // RESPONSE OF THIS COMPONENT
 // { 
@@ -28,6 +29,7 @@ const RegisterForm = () => {
     });
 
     const sendUserData: SubmitHandler<NewUser> = (data) => {
+        createANewUser(data);
         console.log(data);
     };
 
