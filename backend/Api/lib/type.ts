@@ -1,4 +1,5 @@
 export type RegisterBody = {
+    type: string;
     firstname: string;
     country: string;
     email: string;
@@ -6,4 +7,8 @@ export type RegisterBody = {
     phone: string;
     password: string;
     policy: boolean;
+}
+
+export type EmailExist = {
+    email: string;
 }
