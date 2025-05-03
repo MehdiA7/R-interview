@@ -27,12 +27,12 @@ const RegisterForm = () => {
         resolver: zodResolver(newUserSchema),
     });
 
-    const createANewUser: SubmitHandler<NewUser> = (data) => {
+    const sendUserData: SubmitHandler<NewUser> = (data) => {
         console.log(data);
     };
 
     return (
-        <form onSubmit={handleSubmit(createANewUser)}>
+        <form onSubmit={handleSubmit(sendUserData)}>
             {/* BUTTON AREA */}
             <Controller
                 name="type"
