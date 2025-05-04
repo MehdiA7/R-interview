@@ -20,9 +20,7 @@ class dbInteract {
     async aQuery(query: string, params?: any[]) {
         let connection;
         try {
-            console.log("Try to connect to the db... : ", process.env.DB_USER)
             connection = await pool.getConnection();
-            console.log("Connected to the db !")
             const data = await connection.query(query, params);
             return data;
         } catch (err) {

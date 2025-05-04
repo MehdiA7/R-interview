@@ -1,5 +1,6 @@
 import express, { Request, Response, text } from "express";
 import { EmailExist, RegisterBody } from "../lib/connectionType";
+import { logger } from "../middleware/logger";
 const dbInteract = require("../services/dbInteract");
 const bcrypt = require("bcrypt");
 const router = express.Router();
@@ -10,7 +11,7 @@ const _db = new dbInteract();
 // documentation about the password hash
 // https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", logger, async (req: Request, res: Response) => {
     const saltRounds = 10;
     let theBody: RegisterBody = req.body;
 

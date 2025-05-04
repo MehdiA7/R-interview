@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { authJwt } from "./middleware/authJwt";
+import { logger } from "./middleware/logger";
 const cors = require("cors");
 
 dotenv.config();
@@ -23,7 +24,7 @@ const loginRouter = require("./routes/login");
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 
-app.get("/", authJwt, (request: Request, response: Response) => {
+app.get("/", authJwt, logger, (request: Request, response: Response) => {
     response.status(200).send({ message: "The api work well !" });
 });
 

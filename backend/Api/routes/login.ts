@@ -1,5 +1,6 @@
 import express, { Request, Response, text } from "express";
 import { LoginBody } from "../lib/connectionType";
+import { logger } from "../middleware/logger";
 const dbInteract = require("../services/dbInteract");
 const bcrypt = require("bcrypt");
 const router = express.Router();
@@ -10,7 +11,7 @@ const _db = new dbInteract();
 // documentation about the password verification
 // https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
 
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", logger, async (req: Request, res: Response) => {
     let theBody: LoginBody = req.body;
     const dbResponse: LoginBody[] = await _db.loginCredential(theBody.email);
 
@@ -36,7 +37,7 @@ router.post("/", async (req: Request, res: Response) => {
     }
 
     delete dbResponse[0].password;
-    const jwtToken = await jwt.sign(dbResponse[0], process.env.SECRET, { expiresIn: "30s" } );
+    const jwtToken = await jwt.sign(dbResponse[0], process.env.SECRET, { expiresIn: "1h" } );
     res.send({
         success: true,
         message: "You are logged !",
