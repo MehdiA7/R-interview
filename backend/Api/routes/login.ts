@@ -13,22 +13,26 @@ router.post("/", async (req: Request, res: Response) => {
     let theBody: LoginBody = req.body;
     const dbResponse: LoginBody[] = await _db.loginCredential(theBody.email);
 
-    if (dbResponse.length === 0)
+    if (dbResponse.length === 0){
         res.status(400).send({
             success: false,
             message: "The password or email is incorrect",
         });
+        return;
+    }
 
     const passwordVerification = await bcrypt.compare(
         theBody.password,
         dbResponse[0].password
     );
 
-    if (!passwordVerification)
+    if (!passwordVerification){
         res.status(400).send({
             success: false,
             message: "The password or email is incorrect",
         });
+        return;
+    }
 
     res.send({ success: true, message: "You are logged !" });
 });

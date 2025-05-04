@@ -1,8 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { LoginCred as LoginCred, loginSchema } from "@/lib/schema/userCredential";
+import {
+    LoginCred as LoginCred,
+    loginSchema,
+} from "@/lib/schema/userCredential";
+import { login } from "@/serverAction/fetchConnection";
+import { redirect } from "next/navigation";
 
 const LoginForm = () => {
     const {
@@ -13,8 +18,13 @@ const LoginForm = () => {
         resolver: zodResolver(loginSchema),
     });
 
+    const [wrongCredential, setWrongCredential] = useState(false);
+
     const sendUserData: SubmitHandler<LoginCred> = async (data) => {
-        console.log(data)
+        const response = await login(data);
+        console.log(response);
+        if (response.success === false) return setWrongCredential(true);
+        redirect("/home");
     };
 
     return (
@@ -22,7 +32,7 @@ const LoginForm = () => {
             <div className="flex flex-col justify-center space-y-2 mb-5 w-[336px]">
                 {/* Field color #f4f8f9 */}
                 <input
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     {...register("email")}
                     className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
@@ -30,13 +40,14 @@ const LoginForm = () => {
                     }`}
                 />
                 <input
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     {...register("password")}
                     className={`bg-[#f4f8f9] h-9 rounded-md p-4 ${
                         errors.password ? "border-2 border-red-500" : null
                     }`}
                 />
+                {wrongCredential && <p className="text-red-500">Password or email is incorrect</p>}
                 <button
                     onClick={() => console.log(errors)}
                     type="submit"

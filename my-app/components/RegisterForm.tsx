@@ -6,6 +6,7 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { NewUser, newUserSchema } from "@/lib/schema/userCredential";
 import { createANewUser } from "@/serverAction/fetchConnection";
 import { redirect } from "next/navigation";
+import { serverActionResponse } from "@/lib/type";
 
 // RESPONSE OF THIS COMPONENT
 // {
@@ -32,9 +33,9 @@ const RegisterForm = () => {
     const [emailIsTaken, setEmailIsTaken] = useState(false);
 
     const sendUserData: SubmitHandler<NewUser> = async (data) => {
-        const response: Response = await createANewUser(data);
+        const response: serverActionResponse = await createANewUser(data);
 
-        if (response.status === 409) return setEmailIsTaken(true);
+        if (!response.success) return setEmailIsTaken(true);
 
         redirect("/login");
     };
