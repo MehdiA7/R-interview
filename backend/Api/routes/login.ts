@@ -35,10 +35,8 @@ router.post("/", async (req: Request, res: Response) => {
         return;
     }
 
-    const jwtToken = await jwt.sign(dbResponse[0].firstname, process.env.SECRET, {
-        expiresIn: "30s",
-    });
-
+    delete dbResponse[0].password;
+    const jwtToken = await jwt.sign(dbResponse[0], process.env.SECRET, { expiresIn: "30s" } );
     res.send({
         success: true,
         message: "You are logged !",

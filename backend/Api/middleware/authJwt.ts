@@ -14,7 +14,6 @@ export const authJwt = (
         res.sendStatus(401);
     } else {
         jwt.verify(token, process.env.SECRET as string, (err: any) => {
-            console.log(err);
 
             if (err) {
                 res.sendStatus(403);
