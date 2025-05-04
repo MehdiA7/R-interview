@@ -3,10 +3,9 @@ import React, { useState } from "react";
 import { FaStoreAlt, FaUserAstronaut } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { NewUser, newUserSchema } from "@/lib/schema/newUser";
+import { NewUser, newUserSchema } from "@/lib/schema/userCredential";
 import { createANewUser } from "@/serverAction/fetchConnection";
-import { redirect } from 'next/navigation'
-
+import { redirect } from "next/navigation";
 
 // RESPONSE OF THIS COMPONENT
 // {
@@ -36,8 +35,8 @@ const RegisterForm = () => {
         const response: Response = await createANewUser(data);
 
         if (response.status === 409) return setEmailIsTaken(true);
-        
-        redirect('/login');
+
+        redirect("/login");
     };
 
     return (
@@ -173,15 +172,14 @@ const RegisterForm = () => {
                     </p>
                 </div>
             </div>
-            <div>
-                <button
-                    onClick={() => console.log(errors)}
-                    type="submit"
-                    className="bg-[#fd5b13] text-white text-[15px] border-1 border-gray-200 rounded-md w-full h-9 hover:bg-white hover:text-black transition-all duration-300"
-                >
-                    Create an Account
-                </button>
-            </div>
+
+            <button
+                onClick={() => console.log(errors)}
+                type="submit"
+                className="bg-[#fd5b13] text-white text-[15px] border-1 border-gray-200 rounded-md w-full h-9 hover:bg-white hover:text-black transition-all duration-300"
+            >
+                Create an Account
+            </button>
         </form>
     );
 };
