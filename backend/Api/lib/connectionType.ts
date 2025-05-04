@@ -14,6 +14,8 @@ export type EmailExist = {
 }
 
 export type LoginBody = {
+    id: number;
+    firstname: string;
     email: string;
     password: string;
 }

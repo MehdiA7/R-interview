@@ -48,7 +48,7 @@ class dbInteract {
 
     async loginCredential(email: string) {
         return await this.aQuery(
-            "SELECT email, password FROM users WHERE email = ?",
+            "SELECT id, firstname, email, password FROM users WHERE email = ?",
             [email]
         );
     };
