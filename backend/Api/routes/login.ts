@@ -1,10 +1,10 @@
-import express, { Request, Response, text } from "express";
+import express, { Request, Response } from "express";
 import { LoginBody } from "../lib/connectionType";
 import { logger } from "../middleware/logger";
 const dbInteract = require("../services/dbInteract");
 const bcrypt = require("bcrypt");
-const router = express.Router();
 const jwt = require("jsonwebtoken");
+const router = express.Router();
 router.use(express.json());
 
 const _db = new dbInteract();

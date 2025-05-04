@@ -20,9 +20,11 @@ app.use(cors(corsOptions));
 
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
+const usersRouter = require("./routes/users");
 
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
+app.use("/users", usersRouter);
 
 app.get("/", authJwt, logger, (request: Request, response: Response) => {
     response.status(200).send({ message: "The api work well !" });

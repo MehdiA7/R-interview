@@ -50,6 +50,12 @@ class dbInteract {
             [email]
         );
     };
+
+    async getAllFirstName() {
+        return await this.aQuery(
+            "SELECT id, firstname FROM users"
+        );
+    };
 };
 
 // REQUIRED
