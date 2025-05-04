@@ -17,8 +17,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 const registerRouter = require("./routes/register");
+const loginRouter = require("./routes/login");
 
 app.use("/register", registerRouter);
+app.use("/login", loginRouter);
 
 app.get("/", (request: Request, response: Response) => {
     response.status(200).send({ message: "The api work well !" });
