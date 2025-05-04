@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load environment variables
 
 const mariadb = require('mariadb');
-import { RegisterBody } from "../lib/type";
+import { RegisterBody } from "../lib/connectionType";
 
 
 const pool = mariadb.createPool({

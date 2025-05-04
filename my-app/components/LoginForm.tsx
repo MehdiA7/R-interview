@@ -8,7 +8,6 @@ const LoginForm = () => {
     const {
         register,
         handleSubmit,
-        control,
         formState: { errors },
     } = useForm<LoginCred>({
         resolver: zodResolver(loginSchema),

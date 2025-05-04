@@ -12,3 +12,8 @@ export type RegisterBody = {
 export type EmailExist = {
     email: string;
 }
+
+export type LoginBody = {
+    email: string;
+    password: string;
+}
