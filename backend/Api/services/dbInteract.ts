@@ -29,24 +29,30 @@ class dbInteract {
             throw err;
         } finally {
             if (connection) connection.release();
-        }
-    }
-
-
-    async emailExist(email: string) {
-        return await this.aQuery(
-            "SELECT email FROM users WHERE email = ?",
-            [email]
-        )
-    }
+        };
+    };
 
     async createUser(body: RegisterBody) {
         return await this.aQuery(
             "INSERT INTO users (type ,firstname, country, email, industry, phone, password, policy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             [body.type, body.firstname, body.country, body.email, body.industry, body.phone, body.password, body.policy]
         );
-    }
-}
+    };
+
+    async emailExist(email: string) {
+        return await this.aQuery(
+            "SELECT email FROM users WHERE email = ?",
+            [email]
+        );
+    };
+
+    async loginCredential(email: string) {
+        return await this.aQuery(
+            "SELECT email, password FROM users WHERE email = ?",
+            [email]
+        );
+    };
+};
 
 // REQUIRED
 // CREATE TABLE users (
