@@ -21,8 +21,6 @@ export async function createANewUser(body: NewUser) {
 
 export async function login(body: LoginCred) {
     try {
-        console.log(body);
-        console.log(Api);
         const response = await fetch(`${Api}/login`, {
             method: "POST",
             headers: {
