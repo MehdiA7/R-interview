@@ -1,8 +1,7 @@
-require('dotenv').config(); // Load environment variables
+require("dotenv").config(); // Load environment variables
 
-const mariadb = require('mariadb');
+const mariadb = require("mariadb");
 import { RegisterBody } from "../lib/connectionType";
-
 
 const pool = mariadb.createPool({
     host: process.env.DB_HOST,
@@ -13,7 +12,7 @@ const pool = mariadb.createPool({
     connectionLimit: 10,
     connectTimeout: 30000,
     acquireTimeout: 30000,
-    trace: true 
+    trace: true,
 });
 
 class dbInteract {
@@ -27,36 +26,49 @@ class dbInteract {
             throw err;
         } finally {
             if (connection) connection.release();
-        };
-    };
+        }
+    }
 
     async createUser(body: RegisterBody) {
         return await this.aQuery(
             "INSERT INTO users (type ,firstname, country, email, industry, phone, password, policy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [body.type, body.firstname, body.country, body.email, body.industry, body.phone, body.password, body.policy]
+            [
+                body.type,
+                body.firstname,
+                body.country,
+                body.email,
+                body.industry,
+                body.phone,
+                body.password,
+                body.policy,
+            ]
         );
-    };
+    }
 
     async emailExist(email: string) {
-        return await this.aQuery(
-            "SELECT email FROM users WHERE email = ?",
-            [email]
-        );
-    };
+        return await this.aQuery("SELECT email FROM users WHERE email = ?", [
+            email,
+        ]);
+    }
 
     async loginCredential(email: string) {
         return await this.aQuery(
             "SELECT id, firstname, email, password FROM users WHERE email = ?",
             [email]
         );
-    };
+    }
 
     async getAllFirstName() {
+        return await this.aQuery("SELECT id, firstname FROM users");
+    }
+
+    async getAnUser(userId: number) {
         return await this.aQuery(
-            "SELECT id, firstname FROM users"
+            "SELECT id, type, firstname, country, email, industry, phone FROM users WHERE id = ?",
+            [userId]
         );
-    };
-};
+    }
+}
 
 // REQUIRED
 // CREATE TABLE users (
