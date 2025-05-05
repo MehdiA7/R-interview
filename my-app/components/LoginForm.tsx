@@ -25,7 +25,7 @@ const LoginForm = () => {
 
         if (response.success === false) return setWrongCredential(true);
         
-        // redirect("/home");
+        redirect("/home");
     };
 
     return (

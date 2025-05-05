@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 const Api: string = process.env.API_URL || "NO API";
 
-export async function createANewUser(body: NewUser) {
+export const createANewUser = async (body: NewUser) => {
     try {
         const response = await fetch(`${Api}/register`, {
             method: "POST",
@@ -25,7 +25,7 @@ export async function createANewUser(body: NewUser) {
     }
 }
 
-export async function login(body: LoginCred) {
+export const login = async (body: LoginCred) => {
     try {
         const response = await fetch(`${Api}/login`, {
             method: "POST",
@@ -43,14 +43,14 @@ export async function login(body: LoginCred) {
 
         const data = await response.json();
 
-                const cookieStore = await cookies();
-        
-                cookieStore.set({
-                    name: 'Authorization',
-                    value: data.token,
-                    httpOnly: true,
-                    path: '/',
-                });
+        const cookieStore = await cookies();
+
+        cookieStore.set({
+            name: "Authorization",
+            value: data.token,
+            httpOnly: true,
+            path: "/",
+        });
 
         return data;
     } catch (error) {
