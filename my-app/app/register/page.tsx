@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const RegisterPage = () => {
     return (
-        <>
-            <div className="flex flex-col items-center justify-center mt-30">
+        <div className="flex flex-col justify-center min-h-screen items-center">
+            <div className="flex flex-col items-center justify-center">
                 <h1 className="text-[41px] font-semibold mb-15">
                     Create an account
                 </h1>
@@ -19,7 +19,7 @@ const RegisterPage = () => {
                 <b className="text-[13px] font-medium">Log In</b>
                 </Link>
             </div>
-        </>
+        </div>
     );
 };
 
