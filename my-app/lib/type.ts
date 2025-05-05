@@ -22,3 +22,13 @@ export type FetchAllFirstnameType = {
     message?: string;
     body?: FetchAllFirstnameResponseType;
 }
+
+export type FetchUserContent = {
+    country: string;
+    email: string;
+    firstname: string;
+    id: number;
+    industry: string;
+    phone: number;
+    type: string;
+}

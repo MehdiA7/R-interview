@@ -1,4 +1,5 @@
 "use client";
+import { FetchUserContent } from "@/lib/type";
 import { fetchUser } from "@/serverAction/fetchUserData";
 import { redirect } from "next/navigation";
 import { FC, useEffect, useState } from "react";
@@ -8,7 +9,7 @@ type DisplayUserProps = {
 };
 
 const DisplayUser: FC<DisplayUserProps> = ({ id }) => {
-	const [user, setUser] = useState();
+	const [user, setUser] = useState<FetchUserContent[]>();
 
     const getUserData = async () => {
         const response = await fetchUser(id);
@@ -22,7 +23,13 @@ const DisplayUser: FC<DisplayUserProps> = ({ id }) => {
 		getUserData();
 	}, []);
 
-    return <div>{id}</div>;
+    return (
+        <>
+            <div>
+                {/* {user?.map((e) => e.)} */}
+            </div>
+        </>
+    )
 };
 
 export default DisplayUser;
