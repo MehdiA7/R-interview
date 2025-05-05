@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const LogoHeader = () => {
     return (
-        <div className="mx-auto inset-x-0 fixed w-20 top-5">
+        <div className="flex items-center justify-center ">
             <Link href={"/home"}>
-                <Image src={logo} alt="logo"></Image>
+                <Image src={logo} alt="logo" className="w-20"></Image>
             </Link>
         </div>
     );
