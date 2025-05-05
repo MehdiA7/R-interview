@@ -1,19 +1,20 @@
-
 import DisplayUser from "@/components/DisplayUser";
+import LogoHeader from "@/components/LogoHeader";
 import React, { FC } from "react";
 
 type DisplayUserPageProps = {
     params: {
-        id: string
-    }
-}
+        id: string;
+    };
+};
 
+const DisplayUserPage: FC<DisplayUserPageProps> = async ({ params }) => {
 
-const DisplayUserPage: FC<DisplayUserPageProps> = ({ params }) => {
     return (
         <div>
-            <p>RESULT : {params.id}</p>
-            <DisplayUser id={parseInt(params.id)}/>
+            <LogoHeader/>
+            <p>RESULT : {params.id && params.id}</p>
+            <DisplayUser id={parseInt(params.id)} />
         </div>
     );
 };

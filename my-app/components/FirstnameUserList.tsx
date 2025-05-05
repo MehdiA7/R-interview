@@ -20,12 +20,18 @@ const FirstnameUserList = () => {
         setFirstnameList(response.body?.content);
 
     };
+
+    const sendInNewPage = (id: number) => {
+        return redirect(`/home/${id}`);
+    }
+    
     return (
         <div className="flex flex-col items-center">
             {firstnameList &&
                 firstnameList.map((f) => (
                     <button
                         key={f.id}
+                        onClick={() => sendInNewPage(f.id)}
                         className="bg-[#fd5b13] w-40 mb-5 text-white rounded-2xl"
                     >
                         {f.firstname}
