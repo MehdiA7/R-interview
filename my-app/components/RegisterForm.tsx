@@ -37,7 +37,7 @@ const RegisterForm = () => {
 
         if (!response.success) return setEmailIsTaken(true);
 
-        redirect("/login");
+        return redirect("/login");
     };
 
     return (
