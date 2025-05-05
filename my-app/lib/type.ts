@@ -5,20 +5,20 @@ export type serverActionResponse = {
     token?: string;
 }
 
-export type FetchFirstnameContentType = {
+export type FetchAllFirstnameContentType = {
     id: number;
     firstname: string;
 }
 
-type FetchFirstnameResponseType = {
+type FetchAllFirstnameResponseType = {
     success: boolean;
     message: string;
-    content: FetchFirstnameContentType[];
+    content: FetchAllFirstnameContentType[];
 }
 
-export type FetchFirstnameType = {
+export type FetchAllFirstnameType = {
     access: boolean;
     success?: boolean;
     message?: string;
-    body?: FetchFirstnameResponseType;
+    body?: FetchAllFirstnameResponseType;
 }
