@@ -8,7 +8,7 @@ const RegisterPage = () => {
     return (
         <>
             <LogoHeader/>
-            <div className="flex flex-col justify-center min-h-screen items-center">
+            <div className="flex flex-col mt-25">
                 <div className="flex flex-col items-center justify-center">
                     <h1 className="text-[41px] font-semibold mb-15">
                         Create an account

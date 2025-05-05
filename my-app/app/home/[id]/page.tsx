@@ -13,7 +13,6 @@ const DisplayUserPage: FC<DisplayUserPageProps> = async ({ params }) => {
     return (
         <div>
             <LogoHeader/>
-            <p>RESULT : {params.id && params.id}</p>
             <DisplayUser id={parseInt(params.id)} />
         </div>
     );

@@ -8,7 +8,7 @@ const LoginPage = () => {
     return (
         <>
             <LogoHeader/>
-            <div className="flex flex-col justify-center min-h-screen items-center">
+            <div className="flex flex-col mt-30">
                 <div className="flex flex-col items-center justify-center ">
                     <h1 className="text-[41px] font-semibold mb-25">Log in</h1>
                     <LoginForm />
