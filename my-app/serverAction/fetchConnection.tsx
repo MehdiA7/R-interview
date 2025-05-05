@@ -13,9 +13,14 @@ export async function createANewUser(body: NewUser) {
             body: JSON.stringify(body),
         });
 
-        return { success: true, message: "Your account is created !"};
+        if (response.status === 409)
+            return { success: false, message: "This email is already used..." };
+
+        const data = await response.json();
+
+        return data;
     } catch (error) {
-        return { success: false, message: "Email is taken..." };
+        return { success: false, message: "Somethin wrong...", error: error };
     }
 }
 
@@ -34,10 +39,10 @@ export async function login(body: LoginCred) {
                 success: false,
                 message: "Email or password is incorrect",
             };
-        return {
-            succes: true,
-            message: "You are logged !"
-        };
+
+        const data = await response.json();
+
+        return data;
     } catch (error) {
         return { success: false, message: error };
     }

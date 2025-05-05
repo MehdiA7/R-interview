@@ -24,7 +24,7 @@ const LoginForm = () => {
         const response = await login(data);
         console.log(response);
         if (response.success === false) return setWrongCredential(true);
-        redirect("/home");
+        // redirect("/home");
     };
 
     return (
