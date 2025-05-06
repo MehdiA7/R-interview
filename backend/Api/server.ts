@@ -18,12 +18,10 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-const registerRouter = require("./routes/register");
-const loginRouter = require("./routes/login");
+const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/users");
 
-app.use("/register", registerRouter);
-app.use("/login", loginRouter);
+app.use("/", authRouter);
 app.use("/users", usersRouter);
 
 app.get("/", authJwt, logger, (request: Request, response: Response) => {

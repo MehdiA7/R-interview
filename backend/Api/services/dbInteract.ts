@@ -1,7 +1,9 @@
-require("dotenv").config(); // Load environment variables
-
+require("dotenv").config();
 const mariadb = require("mariadb");
 import { RegisterBody } from "../lib/connectionType";
+
+// Singleton pattern documentation
+// https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-express-js-5ebb
 
 const pool = mariadb.createPool({
     host: process.env.DB_HOST,
@@ -15,7 +17,16 @@ const pool = mariadb.createPool({
     trace: true,
 });
 
-class dbInteract {
+class DBInteract {
+    private static instance: DBInteract | null = null;
+    
+    public static getInstance(): DBInteract {
+        if (!DBInteract.instance) {
+            DBInteract.instance = new DBInteract();
+        }
+        return DBInteract.instance;
+    }
+
     async aQuery(query: string, params?: any[]) {
         let connection;
         try {
@@ -23,6 +34,7 @@ class dbInteract {
             const data = await connection.query(query, params);
             return data;
         } catch (err) {
+            console.error("Erreur dans la requête SQL:", err);
             throw err;
         } finally {
             if (connection) connection.release();
@@ -31,7 +43,7 @@ class dbInteract {
 
     async createUser(body: RegisterBody) {
         return await this.aQuery(
-            "INSERT INTO users (type ,firstname, country, email, industry, phone, password, policy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO users (type, firstname, country, email, industry, phone, password, policy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             [
                 body.type,
                 body.firstname,
@@ -70,17 +82,4 @@ class dbInteract {
     }
 }
 
-// REQUIRED
-// CREATE TABLE users (
-//     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-//     type varchar(30),
-//     firstname varchar(255),
-//     country varchar(50),
-//     email varchar(255),
-//     industry varchar(255),
-//     phone varchar(255),
-//     password varchar(255),
-//     policy BOOLEAN
-// )
-
-module.exports = dbInteract;
+module.exports = DBInteract;

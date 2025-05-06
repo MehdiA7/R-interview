@@ -3,8 +3,8 @@ import { authJwt } from "../middleware/authJwt";
 import { logger } from "../middleware/logger";
 const router = express.Router();
 router.use(express.json());
-const dbInteract = require("../services/dbInteract");
-const _db = new dbInteract();
+const DBInteract = require("../services/DBInteract");
+const _db = DBInteract.getInstance();
 
 router.get("/", authJwt, logger, async (req: Request, res: Response) => {
     const allFirstname = await _db.getAllFirstName();
