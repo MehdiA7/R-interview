@@ -1,4 +1,4 @@
-import express, { Request, Response, text } from "express";
+import express, { Request, Response } from "express";
 import { EmailExist, RegisterBody } from "../lib/connectionType";
 import { logger } from "../middleware/logger";
 const dbInteract = require("../services/dbInteract");
@@ -28,6 +28,14 @@ router.post("/", logger, async (req: Request, res: Response) => {
         res.status(400).send({
             success: false,
             message: "All field is required",
+        });
+        return;
+    }
+
+    if (theBody.policy !== true) {
+        res.status(400).send({
+            success: false,
+            message: "Policy is incorect, You need to accept the policy",
         });
         return;
     }
@@ -75,10 +83,11 @@ router.post("/", logger, async (req: Request, res: Response) => {
         return;
     }
 
-    if (theBody.policy !== true) {
+
+    if (theBody.password.length < 8) {
         res.status(400).send({
             success: false,
-            message: "Policy is incorect, You need to accept the policy",
+            message: "Password is incorrect, 8char min",
         });
         return;
     }
@@ -88,18 +97,6 @@ router.post("/", logger, async (req: Request, res: Response) => {
         res.status(409).send({
             success: false,
             message: "This email is taken",
-        });
-        return;
-    }
-
-    if (
-        theBody.password.length < 8 ||
-        !/\d/.test(theBody.password) ||
-        !/[a-zA-Z]/.test(theBody.password)
-    ) {
-        res.status(400).send({
-            success: false,
-            message: "Password is incorrect, 8char min",
         });
         return;
     }

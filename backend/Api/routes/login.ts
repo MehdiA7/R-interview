@@ -13,8 +13,35 @@ const _db = new dbInteract();
 
 router.post("/", logger, async (req: Request, res: Response) => {
     let theBody: LoginBody = req.body;
+    
+    
+    if (!theBody.email || !theBody.password) {
+        res.status(400).send({
+            success: false,
+            message: "Email and password field is required",
+        });
+        return;
+    }
+    
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(theBody.email)) {
+        res.status(400).send({
+            success: false,
+            message: "Email format is invalid",
+        });
+        return;
+    }
+    
+    if (theBody.password.length < 8) {
+        res.status(400).send({
+            success: false,
+            message: "Password is incorrect, 8char min",
+        });
+        return;
+    }
+    
     const dbResponse: LoginBody[] = await _db.loginCredential(theBody.email);
-
     if (dbResponse.length === 0) {
         res.status(400).send({
             success: false,
@@ -37,7 +64,9 @@ router.post("/", logger, async (req: Request, res: Response) => {
     }
 
     delete dbResponse[0].password;
-    const jwtToken = await jwt.sign(dbResponse[0], process.env.SECRET, { expiresIn: "1h" } );
+    const jwtToken = await jwt.sign(dbResponse[0], process.env.SECRET, {
+        expiresIn: "1h",
+    });
     res.send({
         success: true,
         message: "You are logged !",
