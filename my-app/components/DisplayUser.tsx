@@ -5,6 +5,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import userProfile from "@/public/userProfile.png";
+import LoadingLogo from "./LoadingLogo";
 
 type DisplayUserProps = {
     id: number;
@@ -27,7 +28,7 @@ const DisplayUser: FC<DisplayUserProps> = ({ id }) => {
     return (
         <>
             <div>
-                {user?.map((e) => (
+                {user ? user?.map((e) => (
                     <div
                         key={e.id}
                         className="flex flex-col items-center mt-10"
@@ -46,7 +47,7 @@ const DisplayUser: FC<DisplayUserProps> = ({ id }) => {
                             <p>Phone : {e.phone}</p>
                         </div>
                     </div>
-                ))}
+                )): <LoadingLogo/>}
             </div>
         </>
     );

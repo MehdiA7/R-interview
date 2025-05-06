@@ -1,5 +1,6 @@
 import DisplayUser from "@/components/DisplayUser";
 import LogoHeader from "@/components/LogoHeader";
+import LogoHeaderSecure from "@/components/LogoHeaderSecure";
 import React, { FC } from "react";
 
 type DisplayUserPageProps = {
@@ -12,7 +13,7 @@ const DisplayUserPage: FC<DisplayUserPageProps> = async ({ params }) => {
 
     return (
         <div>
-            <LogoHeader/>
+            <LogoHeaderSecure/>
             <DisplayUser id={parseInt(params.id)} />
         </div>
     );
