@@ -19,11 +19,98 @@ export function FeedBackCarousel() {
                     <Card>
                         <CardContent>
                             <div>
-                                <Image
-                                    src={userProfile}
-                                    alt="Profile"
-                                    className="w-20"
-                                />
+                                <p>
+                                    This platform is game-changer! Now i'm
+                                    totaly rich ! Thanks a lot for this
+                                    software.
+                                </p>
+                                <div className="flex">
+                                    <Image
+                                        src={userProfile}
+                                        alt="Profile"
+                                        className="w-20"
+                                    />
+                                    <div className="mt-4">
+                                        <p>Casey Bach</p>
+                                        <p>Founder, Laravel</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </CarouselItem>
+                <CarouselItem>
+                    <Card>
+                        <CardContent>
+                            <div>
+                                <p>
+                                    This software has revolutionized my
+                                    workflow! I'm now more productive than ever.
+                                    Kudos to the team!
+                                </p>
+                                <div className="flex">
+                                    <Image
+                                        src={userProfile}
+                                        alt="Profile"
+                                        className="w-20"
+                                    />
+                                    <div className="mt-4">
+                                        <p>Ava Thompson</p>
+                                        <p>CEO, Tech Innovators</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </CarouselItem>
+
+                <CarouselItem>
+                    <Card>
+                        <CardContent>
+                            <div>
+                                <p>
+                                    I can't believe how easy it was to set up
+                                    and start using. It's like having a personal
+                                    assistant!
+                                </p>
+                                <div className="flex">
+                                    <Image
+                                        src={userProfile}
+                                        alt="Profile"
+                                        className="w-20"
+                                    />
+                                    <div className="mt-4">
+                                        <p>Ethan Lee</p>
+                                        <p>CTO, Data Solutions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </CarouselItem>
+
+                <CarouselItem>
+                    <Card>
+                        <CardContent>
+                            <div>
+                                <p>
+                                    The customer support is top-notch. They
+                                    helped me every step of the way. Highly
+                                    recommend!
+                                </p>
+                                <div className="flex">
+                                    <Image
+                                        src={userProfile}
+                                        alt="Profile"
+                                        className="w-20"
+                                    />
+                                    <div className="mt-4">
+                                        <p>Sophia Martinez</p>
+                                        <p>
+                                            Marketing Director, GreenThumb Co.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Logo from "@/public/logo.png";
 import { FeedBackCarousel } from "@/components/FeedBackCarousel";
+import Link from "next/link";
 
 export default function Home() {
     return (
@@ -16,9 +17,17 @@ export default function Home() {
                     View all the analytics and grow your business from anywhere!
                 </p>
             </div>
-            <div className="flex justify-center ">
+            <div className="flex justify-center w-full mb-10">
                 <FeedBackCarousel />
             </div>
+            <div className="flex justify-center">
+                <Link href={"/register"}>
+                    <button className="bg-[#fd5b13] text-white text-[15px] border-1 border-[#fd5b13] rounded-md w-52 h-9 hover:bg-white hover:text-black transition-all duration-300">
+                        Register
+                    </button>
+                </Link>
+            </div>
+            <div className="h-52"></div>
         </main>
     );
 }
