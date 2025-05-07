@@ -14,42 +14,39 @@ type DisplayUserProps = {
 const DisplayUser: FC<DisplayUserProps> = ({ id }) => {
     const [user, setUser] = useState<FetchUserContent[]>();
 
-    const getUserData = async () => {
-        const response = await fetchUser(id);
-
-        if (!response.access) return redirect("/login");
-
-        setUser(response.body?.content);
-    };
     useEffect(() => {
+        const getUserData = async () => {
+            const response = await fetchUser(id);
+            if (!response.access) return redirect("/login");
+            setUser(response.body?.content);
+        };
+
         getUserData();
-    }, []);
+    }, [id]); // Only depend on the id prop
 
     return (
-        <>
-            <div>
-                {user ? user?.map((e) => (
-                    <div
-                        key={e.id}
-                        className="flex flex-col items-center mt-10"
-                    >
-                        <Image
-                            src={userProfile}
-                            alt="profile"
-                            className="w-30"
-                        />
-                        <div>
-                            <p>{e.type}</p>
-                            <p>First name : {e.firstname}</p>
-                            <p>Country : {e.country}</p>
-                            <p>Industry : {e.industry}</p>
-                            <p>Email : {e.email}</p>
-                            <p>Phone : {e.phone}</p>
-                        </div>
+        <div>
+            {user ? user.map((e) => (
+                <div
+                    key={e.id}
+                    className="flex flex-col items-center mt-10"
+                >
+                    <Image
+                        src={userProfile}
+                        alt="profile"
+                        className="w-30"
+                    />
+                    <div>
+                        <p>{e.type}</p>
+                        <p>First name : {e.firstname}</p>
+                        <p>Country : {e.country}</p>
+                        <p>Industry : {e.industry}</p>
+                        <p>Email : {e.email}</p>
+                        <p>Phone : {e.phone}</p>
                     </div>
-                )): <LoadingLogo/>}
-            </div>
-        </>
+                </div>
+            )) : <LoadingLogo/>}
+        </div>
     );
 };
 

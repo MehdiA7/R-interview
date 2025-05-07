@@ -20,8 +20,8 @@ export function FeedBackCarousel() {
                         <CardContent>
                             <div>
                                 <p>
-                                    This platform is game-changer! Now i'm
-                                    totaly rich ! Thanks a lot for this
+                                    This platform is game-changer! Now I&apos;m
+                                    totaly rich! Thanks a lot for this
                                     software.
                                 </p>
                                 <div className="flex">
@@ -45,7 +45,7 @@ export function FeedBackCarousel() {
                             <div>
                                 <p>
                                     This software has revolutionized my
-                                    workflow! I'm now more productive than ever.
+                                    workflow! I&apos;m now more productive than ever.
                                     Kudos to the team!
                                 </p>
                                 <div className="flex">
@@ -69,8 +69,8 @@ export function FeedBackCarousel() {
                         <CardContent>
                             <div>
                                 <p>
-                                    I can't believe how easy it was to set up
-                                    and start using. It's like having a personal
+                                    I can&apos;t believe how easy it was to set up
+                                    and start using. It&apos;s like having a personal
                                     assistant!
                                 </p>
                                 <div className="flex">

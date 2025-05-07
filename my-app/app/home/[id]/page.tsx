@@ -1,22 +1,23 @@
 import DisplayUser from "@/components/DisplayUser";
 import LogoHeader from "@/components/LogoHeader";
-import LogoHeaderSecure from "@/components/LogoHeaderSecure";
-import React, { FC } from "react";
+import React from "react";
 
 type DisplayUserPageProps = {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 };
 
-const DisplayUserPage: FC<DisplayUserPageProps> = async ({ params }) => {
+async function DisplayUserPage({ params }: DisplayUserPageProps) {
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id);
 
     return (
         <div>
-            <LogoHeaderSecure/>
-            <DisplayUser id={parseInt(params.id)} />
+            <LogoHeader />
+            <DisplayUser id={id} />
         </div>
     );
-};
+}
 
 export default DisplayUserPage;

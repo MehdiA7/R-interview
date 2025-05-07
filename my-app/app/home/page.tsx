@@ -1,5 +1,4 @@
 import FirstnameUserList from "@/components/FirstnameUserList";
-import LogoHeader from "@/components/LogoHeader";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 
