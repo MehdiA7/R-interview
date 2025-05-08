@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 var corsOptions = {
-    "origin": "*",
+    "origin": ["http://localhost:3000"],
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
     "optionsSuccessStatus": 204
